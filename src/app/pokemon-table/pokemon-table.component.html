@@ -1,0 +1,57 @@
+<div class="pokemon-table-container">
+  <app-filter-container
+    (filterTypeChange)="onFilterTypeChange($event)"
+    (filterNameChange)="onFilterNameChange($event)"
+  />
+
+  <mat-table
+    [dataSource]="filteredDataSource"
+    class="mat-elevation-z8 pokemon-table"
+  >
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef class="header-cell">
+        ID
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="data-cell">
+        {{ element.id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef class="header-cell">
+        Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="data-cell">
+        {{ element.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="types">
+      <mat-header-cell *matHeaderCellDef class="header-cell">
+        Types
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="data-cell">
+        {{ element.types }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="navigateToDetail(row.id)"
+      class="clickable-row"
+    ></mat-row>
+  </mat-table>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <p>Loading...</p>
+  </div>
+
+  <mat-paginator
+    [length]="totalPokemons"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10]"
+    (page)="onPageChange($event)"
+    class="pokemon-paginator"
+  ></mat-paginator>
+</div>

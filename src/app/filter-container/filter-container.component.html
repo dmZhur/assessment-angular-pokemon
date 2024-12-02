@@ -1,0 +1,20 @@
+<div class="filter-container">
+  <label for="nameFilter" class="filter-label">Filter by Name:</label>
+  <input
+    id="nameFilter"
+    type="text"
+    [(ngModel)]="filterName"
+    (input)="onFilterNameChange()"
+    placeholder="Enter name"
+    class="filter-input"
+  />
+  <label for="typeFilter" class="filter-label">Filter by Type:</label>
+  <input
+    id="typeFilter"
+    type="text"
+    [(ngModel)]="filterType"
+    (input)="onFilterTypeChange()"
+    placeholder="Enter type"
+    class="filter-input"
+  />
+</div>
